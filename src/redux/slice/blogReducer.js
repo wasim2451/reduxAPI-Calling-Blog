@@ -13,7 +13,11 @@ const blogReducer=createSlice({
         loading:false,
         error:null
     },
-    reducers:{}, // It takes two things state and actions
+    reducers:{
+        addData:(state,action)=>{
+            state.posts.push(action.payload);
+        }
+    }, // It takes two things state and actions
     extraReducers:(builder)=>{
         builder
         .addCase(fetchData.pending,(state)=>{
@@ -26,7 +30,8 @@ const blogReducer=createSlice({
         .addCase(fetchData.rejected,(state)=>{
             state.loading=false;
             state.error="Error encountered while fetching !"
-        });
+        })
     }
 });
 export default blogReducer.reducer;
+export const {addData}=blogReducer.actions;
